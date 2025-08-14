@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Exchange Manager</title>
+</head>
+<body>
+    <h1>Currency Exchange Manager</h1>
+    <form id="currencyForm">
+        <input type="text" id="name" placeholder="Currency Name" required>
+        <input type="text" id="code" placeholder="Currency Code" required>
+        <input type="number" step="0.01" id="rate" placeholder="Rate" required>
+        <button type="submit">Add Currency</button>
+    </form>
+    <table border="1" cellpadding="5" style="margin-top:20px;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Rate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="currencyTable"></tbody>
+    </table>
+    <script>
+        const API_URL = '/api/currencies';
+        const form = document.getElementById('currencyForm');
+        const tableBody = document.getElementById('currencyTable');
+
+        async function fetchCurrencies() {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            tableBody.innerHTML = '';
+            data.forEach(currency => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${currency.name}</td>
+                    <td>${currency.code}</td>
+                    <td>${currency.rate}</td>
+                    <td>
+                        <button onclick="updateCurrency('${currency._id}')">Update</button>
+                        <button onclick="deleteCurrency('${currency._id}')">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        async function deleteCurrency(id) {
+            await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+            fetchCurrencies();
+        }
+
+        async function updateCurrency(id) {
+            const newRate = prompt("Enter new rate:");
+            if (newRate) {
+                await fetch(`${API_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ rate: parseFloat(newRate) })
+                });
+                fetchCurrencies();
+            }
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const currency = {
+                name: document.getElementById('name').value,
+                code: document.getElementById('code').value,
+                rate: parseFloat(document.getElementById('rate').value)
+            };
+            await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(currency)
+            });
+            form.reset();
+            fetchCurrencies();
+        });
+
+        fetchCurrencies();
+    </script>
+</body>
+</html>
