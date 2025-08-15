@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+    background-color: #0077b6;
+    color: white;
+    padding: 15px 0;
+    margin: 0;
+}
+form {
+    max-width: 700px;
+    margin: 20px auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    flex: 1;
+    min-width: 150px;
+}
+form button {
+    padding: 8px 15px;
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+form button:hover {
+    background-color: #005f87;
+}
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    width: 90%;
+    background: white;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: #0077b6;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+tr:hover {
+    background-color: #f1f1f1;
+}
+button {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+button[onclick^="updateCurrency"] {
+    background-color: #ffb703;
+    color: white;
+}
+button[onclick^="updateCurrency"]:hover {
+    background-color: #e09b00;
+}
+button[onclick^="deleteCurrency"] {
+    background-color: #d62828;
+    color: white;
+}
+button[onclick^="deleteCurrency"]:hover {
+    background-color: #b81f1f;
+}
