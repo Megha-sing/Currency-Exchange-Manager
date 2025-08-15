@@ -15,6 +15,9 @@ It lets you add, view, update, and delete currencies with a minimal HTML + JavaS
 - **Frontend:** HTML, CSS, JavaScript (Fetch API)
 - **Database:** MongoDB
 
+## 📷 Project Preview
+<img width="959" height="499" alt="image" src="https://github.com/user-attachments/assets/a16f00f9-15c8-4490-88e8-1c8e9bf2fb21" />
+
 ## 📦 Installation
 ```bash
 # Clone the repository
